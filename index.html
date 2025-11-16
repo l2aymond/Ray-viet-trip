@@ -593,7 +593,6 @@
 
        // JavaScript for Password Check
        function checkPassword() {
-           // The Base64 encoded version of "abc123" is "YWJjMTIz"
            const correctBase64 = "YWJjMTIz"; 
            
            const inputElement = document.getElementById("password-input");
@@ -609,7 +608,7 @@
                userInputBase64 = ""; // Handle potential errors if input is invalid
            }
 
-           if (userInputBase6t4 === correctBase64) {
+           if (userInputBase64 === correctBase64) {
                // Correct password
                document.getElementById("password-overlay").style.display = "none";
                document.getElementById("main-content").style.display = "block";
@@ -633,3 +632,4 @@
 </body>
 
 </html>
+
