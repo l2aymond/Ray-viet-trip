@@ -18,22 +18,56 @@
             transform: translateY(-4px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
-        .tab-button {
-            transition: all 0.2s ease;
-        }
-        .tab-button.active {
-            background-color: #4f46e5;
-            color: #ffffff;
+        /* Styling for details/summary accordion */
+        details > summary {
+            cursor: pointer;
+            padding: 0.75rem 1.25rem;
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            border: 1px solid #e5e7eb;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #4f46e5;
+            transition: background-color 0.2s;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
-        .tab-button:not(.active):hover {
-            background-color: #e0e7ff;
+        details > summary:hover {
+            background-color: #f9fafb;
         }
-        .tab-content {
-            display: none;
+        details[open] > summary {
+            background-color: #f3f4f6;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            box-shadow: none;
         }
-        .tab-content.active {
+        .details-content {
+            border: 1px solid #e5e7eb;
+            border-top: 0;
+            padding: 1.5rem;
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .itinerary-link {
             display: block;
+            padding: 4px 0;
+        }
+        .itinerary-link a {
+            font-weight: 500;
+            color: #4f46e5;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .itinerary-link a:hover {
+            color: #3730a3;
+            text-decoration: underline;
+        }
+        .itinerary-link a span {
+            font-size: 0.875rem;
+            font-weight: 400;
+            color: #6b7280;
+            margin-left: 0.25rem;
         }
     </style>
 </head>
@@ -68,190 +102,325 @@
                 <p class="text-xl text-gray-600">Ho Chi Minh City & Da Nang (Dec 20 - Dec 28)</p>
             </header>
 
-            <!-- Tabs Navigation -->
+            <!-- Pre-Departure Briefing (Collapsible) -->
             <div class="mb-8">
-                <div class="flex flex-wrap justify-center gap-2">
-                    <button class="tab-button active py-2 px-4 rounded-full font-semibold" data-tab="pre-departure">
-                        Pre-Departure Briefing
-                    </button>
-                    <button class="tab-button py-2 px-4 rounded-full font-semibold" data-tab="hcmc">
-                        HCMC (Days 1-4)
-                    </button>
-                    <button class="tab-button py-2 px-4 rounded-full font-semibold" data-tab="danang">
-                        Da Nang (Days 5-9)
-                    </button>
-                </div>
+                <details>
+                    <summary>View Critical Pre-Departure Briefing</summary>
+                    <div class="details-content space-y-6">
+                        <!-- Connectivity -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">1. Connectivity Strategy (eSIM)</h3>
+                            <p class="text-gray-700 mb-4">The plan to buy a physical SIM at the airport carries a high risk of scams. This could leave you without data when you need it most for booking a Grab.</p>
+                            <div class="bg-green-100 border-l-4 border-green-500 text-green-800 p-4 rounded-md">
+                                <strong class="font-semibold">Recommendation:</strong> Pre-purchase a <strong class="font-bold">Viettel network eSIM</strong> from a trusted platform like Klook before you travel. This is the most secure and efficient strategy.
+                            </div>
+                        </div>
+                        <!-- Da Nang Climate -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">2. Climate Expectation (Da Nang)</h3>
+                            <p class="text-gray-700 mb-4">December in Da Nang (20-25°C) is <strong class="text-red-600">not a beach-swimming month</strong>. Expect rougher waters and stronger winds. Swimming will likely not be feasible or safe.</p>
+                            <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-800 p-4 rounded-md">
+                                <strong class="font-semibold">Recommendation:</strong> Reframe your time at My Khe Beach as a scenic walk. Pack a light jacket or sweater for beach walks and evenings.
+                            </div>
+                        </div>
+                        <!-- Da Nang Budget -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">3. Budget Mismatch (Da Nang Seafood)</h3>
+                            <p class="text-gray-700 mb-4">There is a <strong class="text-red-600">critical mismatch</strong> between your budget (150k-400k VND) and selected restaurants. My Hanh Seafood and Be Man Seafood are Michelin-listed, with actual costs closer to <strong class="font-bold">500k-1,000k VND per person</strong>.</p>
+                            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-md">
+                                <strong class="font-semibold">Recommendation:</strong> Treat these meals as "splurge" experiences and adjust your daily budget accordingly, or seek out standard local restaurants.
+                            </div>
+                        </div>
+                        <!-- Health & Safety -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">4. Health & Safety Protocols</h3>
+                            <ul class="list-disc list-inside space-y-3 text-gray-700">
+                                <li><strong class="text-gray-900">Theft Protocol (HCMC D1):</strong> Wear a cross-body bag on your front. <strong class="text-red-600">Do not walk and text with your phone in hand near the street</strong>.</li>
+                                <li><strong class="text-gray-900">Insect Protocol (Cu Chi):</strong> Non-negotiable. Wear long pants and closed-toe shoes. Apply strong mosquito repellent *before* you go.</li>
+                                <li><strong class="text-gray-900">Food Safety Protocol:</strong> Use the 3-step test for street food: Is it <strong class="font-semibold">busy</strong>? Is it <strong class="font-semibold">hot</strong>? Is it <strong class="font-semibold">clean</strong>?</li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
             </div>
 
-            <!-- Tab Content -->
+            <!-- Itinerary Timeline -->
             <main>
-                <!-- Pre-Departure Tab -->
-                <div id="pre-departure" class="tab-content active space-y-6">
-                    <h2 class="text-3xl font-bold text-center mb-6 text-indigo-700">Critical Pre-Departure Briefing</h2>
-                    
-                    <!-- Connectivity -->
-                    <div class="bg-white p-6 rounded-lg shadow-lg">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">1. Connectivity Strategy (eSIM)</h3>
-                        <p class="text-gray-700 mb-4">The plan to buy a physical SIM at the airport carries a high risk of scams (overcharging, faulty SIMs). This could leave you without data when you need it most for booking a Grab.</p>
-                        <div class="bg-green-100 border-l-4 border-green-500 text-green-800 p-4 rounded-md">
-                            <strong class="font-semibold">Recommendation:</strong> Pre-purchase a <strong class="font-bold">Viettel network eSIM</strong> from a trusted platform like Klook before you travel. This is the most secure and efficient strategy, ensuring you have data the moment you land.
-                        </div>
-                    </div>
-
-                    <!-- Da Nang Climate -->
-                    <div class="bg-white p-6 rounded-lg shadow-lg">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">2. Climate Expectation (Da Nang)</h3>
-                        <p class="text-gray-700 mb-4">December in Da Nang (20-25°C) is <strong class="text-red-600">not a beach-swimming month</strong>. Your notes on "rougher waters and stronger winds" are correct. Swimming will likely not be feasible or safe.</p>
-                        <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-800 p-4 rounded-md">
-                            <strong class="font-semibold">Recommendation:</strong> Reframe your time at My Khe Beach as a scenic walk or photographic opportunity. Pack a light jacket or sweater, as it will be necessary for beach walks and evenings.
-                        </div>
-                    </div>
-
-                    <!-- Da Nang Budget -->
-                    <div class="bg-white p-6 rounded-lg shadow-lg">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">3. Budget Mismatch (Da Nang Seafood)</h3>
-                        <p class="text-gray-700 mb-4">There is a <strong class="text-red-600">critical mismatch</strong> between your restaurant budget (150k-400k VND) and your selected restaurants. My Hanh Seafood and Be Man Seafood are Michelin-listed, with actual costs closer to <strong class="font-bold">500k-1,000k VND per person</strong>.</p>
-                        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-md">
-                            <strong class="font-semibold">Recommendation:</strong> Treat these meals as "splurge" experiences and adjust your daily budget accordingly, or, seek out standard, non-Michelin-listed local restaurants which will fit your 150k-300k VND budget.
-                        </div>
-                    </div>
-
-                    <!-- Health & Safety -->
-                    <div class="bg-white p-6 rounded-lg shadow-lg">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">4. Health & Safety Protocols</h3>
-                        <ul class="list-disc list-inside space-y-3 text-gray-700">
-                            <li>
-                                <strong class="text-gray-900">Theft Protocol (HCMC D1 / Ben Thanh):</strong> Do not use back pockets. Wear a cross-body bag on your front. <strong class="text-red-600">Do not walk and text with your phone in hand near the street</strong>; motorbike snatching is a real risk.
-                            </li>
-                            <li>
-                                <strong class="text-gray-900">Insect Protocol (Cu Chi Tunnels):</strong> This is non-negotiable. Wear long pants and closed-toe shoes. Apply strong mosquito repellent *before* you get on the bus and bring it to re-apply.
-                            </li>
-                            <li>
-                                <strong class="text-gray-900">Food Safety Protocol:</strong> Use the 3-step test for street food: Is it <strong class="font-semibold">busy</strong> (especially with locals)? Is it <strong class="font-semibold">hot</strong> (cooked-to-order)? Is it <strong class="font-semibold">clean</strong> (observe the vendor)? Do not drink tap water.
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- HCMC Tab -->
-                <div id="hcmc" class="tab-content space-y-6">
-                    <h2 class="text-3xl font-bold text-center mb-6 text-indigo-700">Ho Chi Minh City (Days 1-4)</h2>
+                <h2 class="text-3xl font-bold text-center mb-8 text-gray-900">9-Day Itinerary</h2>
+                <div class="space-y-6">
 
                     <!-- Day 1 -->
                     <div class="bg-white p-6 rounded-lg shadow-lg day-card">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Day 1 (Dec 20): Arrival & D1 Orientation</h3>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Day 1 (Dec 20): Arrival & HCMC</h3>
                         <p class="text-gray-700 mb-4">Arrive at SGN, transfer to District 1 accommodation.</p>
+                        <ul class="mb-4">
+                            <li class="itinerary-link">
+                                <a href="https://www.grab.com/vn/" target="_blank">
+                                    Use Grab App for Airport Transfer <span>- Official Site &rarr;</span>
+                                </a>
+                            </li>
+                        </ul>
                         <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-800 p-4 rounded-md">
-                            <strong class="font-semibold">Recommendation:</strong> Using the Grab app for your airport transfer is the most reliable and transparently-priced option.
+                            <strong class="font-semibold">Recommendation:</strong> Using Grab is the most reliable and transparently-priced option from the airport.
                         </div>
                     </div>
 
                     <!-- Day 2 -->
                     <div class="bg-white p-6 rounded-lg shadow-lg day-card">
                         <h3 class="text-2xl font-bold text-gray-900 mb-3">Day 2 (Dec 21): Historical Context</h3>
-                        <p class="text-gray-700 mb-4">Morning tour to Cu Chi Tunnels, followed by an afternoon visit to the War Remnants Museum. Relax at Nguyen Hue Walking Street in the evening.</p>
+                        <p class="text-gray-700 mb-2 font-semibold">Main Plan:</p>
+                        <ul class="list-disc list-inside mb-4 space-y-1">
+                            <li class="itinerary-link">
+                                <a href="https://www.klook.com/en-US/activity/1471-cu-chi-tunnels-experience-ho-chi-minh-city/" target="_blank">
+                                    Cu Chi Tunnels (Morning Tour) <span>- Book on Klook &rarr;</span>
+                                </a>
+                            </li>
+                            <li class="itinerary-link">
+                                <a href="https://baotangchungtichchientranh.vn/en" target="_blank">
+                                    War Remnants Museum (Afternoon) <span>- Official Site &rarr;</span>
+                                </a>
+                            </li>
+                            <li class="itinerary-link">
+                                <a href="https://www.vietnam-guide.com/ho-chi-minh-city/nguyen-hue-street.htm" target="_blank">
+                                    Nguyen Hue Walking Street (Evening) <span>- Info &rarr;</span>
+                                </a>
+                            </li>
+                        </ul>
                         <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-md">
-                            <strong class="font-semibold">Watch Out For:</strong> This is an <strong class="font-bold">emotionally grueling day</strong>. Both sites present graphic and somber content. The schedule is tight; you must book the earliest possible Cu Chi tour (7:30/8:00 AM) to have time for the museum (last entry 5:00 PM).
+                            <strong class="font-semibold">Watch Out For:</strong> This is an <strong class="font-bold">emotionally grueling day</strong>. Book the earliest Cu Chi tour (7:30/8:00 AM) to have time for the museum (last entry 5:00 PM). Insect protocol is mandatory for Cu Chi.
                         </div>
-                        <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-800 p-4 rounded-md mt-4">
-                            <strong class="font-semibold">Recommendation:</strong> The <strong class="font-bold">Insect Protocol</strong> (long pants, repellent) is mandatory for the Cu Chi Tunnels.
-                        </div>
+                        <details class="mt-6">
+                            <summary>Show Evening Alternative Options</summary>
+                            <div class="details-content space-y-4">
+                                <li class="itinerary-link">
+                                    <a href="https://www.luneproduction.com/ao-show" target="_blank">
+                                        À Ố Show by Lune Production <span>- Official Site &rarr;</span>
+                                    </a>
+                                </li>
+                                <li class="itinerary-link">
+                                    <a href="https://www.citypassguide.com/destination/ho-chi-minh-city/activities/golden-dragon-water-puppet-theatre" target="_blank">
+                                        Golden Dragon Water Puppet Show <span>- Info &rarr;</span>
+                                    </a>
+                                </li>
+                            </div>
+                        </details>
                     </div>
 
                     <!-- Day 3 -->
                     <div class="bg-white p-6 rounded-lg shadow-lg day-card">
                         <h3 class="text-2xl font-bold text-gray-900 mb-3">Day 3 (Dec 22): D1 Landmark Analysis</h3>
-                        <p class="text-gray-700 mb-4">Walking tour of Reunification Palace, Notre Dame, Central Post Office, Jade Emperor Pagoda, Ben Thanh Market, and Bitexco Skydeck for sunset.</p>
+                        <p class="text-gray-700 mb-2 font-semibold">Recommended Sequence:</p>
+                        <ul class="list-disc list-inside mb-4 space-y-1">
+                            <li class="itinerary-link">
+                                <a href="https://www.dinhdoclap.gov.vn/en/" target="_blank">
+                                    Reunification Palace (9:00 AM) <span>- Official Site &rarr;</span>
+                                </a>
+                            </li>
+                            <li class="itinerary-link">
+                                <a href="https://www.vietnam-guide.com/ho-chi-minh-city/notre-dame-cathedral.htm" target="_blank">
+                                    Notre Dame Cathedral (Exterior) <span>- Info &rarr;</span>
+                                </a>
+                            </li>
+                            <li class="itinerary-link">
+                                <a href="https://www.vietnam-guide.com/ho-chi-minh-city/central-post-office.htm" target="_blank">
+                                    Central Post Office <span>- Info &rarr;</span>
+                                </a>
+                            </li>
+                             <li class="itinerary-link">
+                                <a href="https://www.vietnam-guide.com/ho-chi-minh-city/jade-emperor-pagoda.htm" target="_blank">
+                                    Jade Emperor Pagoda <span>- Info &rarr;</span>
+                                </a>
+                            </li>
+                            <li class="itinerary-link">
+                                <a href="https://www.vietnam-guide.com/ho-chi-minh-city/ben-thanh-market.htm" target="_blank">
+                                    Ben Thanh Market (Afternoon) <span>- Info &rarr;</span>
+                                </a>
+                            </li>
+                            <li class="itinerary-link">
+                                <a href="https://www.bitexcofinancialtower.com/sky-deck" target="_blank">
+                                    Bitexco Skydeck (4:30 PM for sunset) <span>- Official Site &rarr;</span>
+                                </a>
+                            </li>
+                        </ul>
                         <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-md">
-                            <strong class="font-semibold">Watch Out For:</strong> Your original plan is flawed. The <strong class="font-bold">Reunification Palace closes for a 1.5-2 hour lunch break</strong> (approx. 11 AM - 1 PM). You will likely miss it if you don't go first.
+                            <strong class="font-semibold">Watch Out For:</strong> <strong class="font-bold">Reunification Palace closes for lunch</strong> (approx. 11 AM - 1 PM). You must visit first in the morning.
                         </div>
-                        <div class="bg-green-100 border-l-4 border-green-500 text-green-800 p-4 rounded-md mt-4">
-                            <strong class="font-semibold">Recommended Sequence:</strong>
-                            <ol class="list-decimal list-inside ml-2 mt-2">
-                                <li><strong>9:00 AM:</strong> Reunification Palace (avoids closure)</li>
-                                <li><strong>11:00 AM:</strong> Walk to Notre Dame (exterior) & Central Post Office</li>
-                                <li><strong>12:00 PM:</strong> Grab to Jade Emperor Pagoda</li>
-                                <li><strong>Afternoon:</strong> Grab to Ben Thanh Market (Apply Theft Protocol!)</li>
-                                <li><strong>4:30 PM:</strong> Arrive at Bitexco Tower for sunset view.</li>
-                            </ol>
-                        </div>
+                        <details class="mt-6">
+                            <summary>Show Alternative Option</summary>
+                            <div class="details-content space-y-4">
+                                <li class="itinerary-link">
+                                    <a href="http://saigonzoo.net/" target="_blank">
+                                        Saigon Zoo and Botanical Gardens <span>- Official Site &rarr;</span>
+                                    </a>
+                                </li>
+                            </div>
+                        </details>
                     </div>
 
                     <!-- Day 4 -->
                     <div class="bg-white p-6 rounded-lg shadow-lg day-card">
                         <h3 class="text-2xl font-bold text-gray-900 mb-3">Day 4 (Dec 23): Transfer to Da Nang</h3>
-                        <p class="text-gray-700 mb-4">Straightforward transfer day. Fly from HCMC (SGN) to Da Nang (DAD) and transfer to your villa on the Son Tra Peninsula.</p>
-                        <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-800 p-4 rounded-md">
-                            <strong class="font-semibold">Recommendation:</strong> Use Grab for transfers on both ends for efficiency and fair pricing.
-                        </div>
+                        <p class="text-gray-700 mb-4">Fly from HCMC (SGN) to Da Nang (DAD) and transfer to your villa.</p>
+                         <ul class="list-disc list-inside mb-4 space-y-1">
+                            <li class="itinerary-link">
+                                <a href="https://www.danangairport.com/" target="_blank">
+                                    Da Nang International Airport (DAD) <span>- Official Site &rarr;</span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-
-                <!-- Da Nang Tab -->
-                <div id="danang" class="tab-content space-y-6">
-                    <h2 class="text-3xl font-bold text-center mb-6 text-indigo-700">Da Nang & Environs (Days 5-9)</h2>
 
                     <!-- Day 5 -->
                     <div class="bg-white p-6 rounded-lg shadow-lg day-card">
                         <h3 class="text-2xl font-bold text-gray-900 mb-3">Day 5 (Dec 24): Son Tra Exploration</h3>
-                        <p class="text-gray-700 mb-4">Explore Linh Ung Pagoda, Ban Co Peak, and My Khe Beach.</p>
+                         <ul class="list-disc list-inside mb-4 space-y-1">
+                            <li class="itinerary-link">
+                                <a href="https://www.vietnam-guide.com/da-nang/linh-ung-pagoda.htm" target="_blank">
+                                    Linh Ung Pagoda (Go at 6 AM for sunrise) <span>- Info &rarr;</span>
+                                </a>
+                            </li>
+                             <li class="itinerary-link">
+                                <a href="https://www.vietnam-guide.com/da-nang/ban-co-peak.htm" target="_blank">
+                                    Ban Co Peak <span>- Info &rarr;</span>
+                                </a>
+                            </li>
+                             <li class="itinerary-link">
+                                <a href="https://www.vietnam-guide.com/da-nang/my-khe-beach.htm" target="_blank">
+                                    My Khe Beach (Scenic walk) <span>- Info &rarr;</span>
+                                </a>
+                            </li>
+                        </ul>
                         <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-md">
-                            <strong class="font-semibold">Watch Out For:</strong> A respectful dress code (cover shoulders and knees) is required for Linh Ung Pagoda. Remember, My Khe Beach is for a <strong class="font-bold">cool, windy walk</strong>, not swimming.
-                        </div>
-                        <div class="bg-green-100 border-l-4 border-green-500 text-green-800 p-4 rounded-md mt-4">
-                            <strong class="font-semibold">Tactical Advantage:</strong> Your villa is on the peninsula. <strong class="font-bold">Go to Linh Ung Pagoda at 6:00 AM for sunrise.</strong> You will have a serene, crowd-free experience that other tourists, who arrive in buses after 8 AM, will not get.
+                            <strong class="font-semibold">Watch Out For:</strong> Dress code (cover shoulders/knees) at Linh Ung Pagoda. My Khe Beach is for a <strong class="font-bold">cool, windy walk</strong>, not swimming.
                         </div>
                     </div>
 
                     <!-- Day 6 -->
                     <div class="bg-white p-6 rounded-lg shadow-lg day-card">
                         <h3 class="text-2xl font-bold text-gray-900 mb-3">Day 6 (Dec 25): Ba Na Hills</h3>
-                        <p class="text-gray-700 mb-4">Full-day tour to Ba Na Hills and the Golden Bridge.</p>
+                        <ul class="list-disc list-inside mb-4 space-y-1">
+                            <li class="itinerary-link">
+                                <a href="https://www.klook.com/en-US/activity/13283-ba-na-hills-ticket-da-nang/" target="_blank">
+                                    Ba Na Hills Full-Day Tour <span>- Book on Klook &rarr;</span>
+                                </a>
+                            </li>
+                        </ul>
                         <div class="bg-red-100 border-l-4 border-red-500 text-red-800 p-4 rounded-md">
                             <strong class="font-semibold">CRITICAL WARNING: PEAK SEASON</strong><br>
-                            You are visiting on <strong class="font-bold">Christmas Day (Dec 25)</strong>, which is a designated "peak season" day and part of the city's Christmas Festival. This guarantees <strong class="font-bold">MAXIMUM crowd density</strong> and extensive queuing.
+                            You are visiting on <strong class="font-bold">Christmas Day (Dec 25)</strong>, guaranteeing <strong class="font-bold">MAXIMUM crowd density</strong>.
                         </div>
                         <div class="bg-green-100 border-l-4 border-green-500 text-green-800 p-4 rounded-md mt-4">
                             <strong class="font-semibold">Essential Recommendation:</strong>
-                            You MUST purchase the <strong class="font-bold">"Ba Na Hills Wow Pass"</strong> (approx. 300,000 VND / ~SGD 16) to skip the cable car lines. This is a critical decision to save 1-2 hours of queuing and preserve the value of your day.
+                            You MUST purchase the <strong class="font-bold">"Wow Pass"</strong> to skip the cable car lines.
+                             <a href="https://www.klook.com/en-US/activity/73739-sun-world-ba-na-hills-wow-pass-da-nang/" target="_blank" class="font-bold text-green-800 hover:underline">
+                                Book Wow Pass on Klook &rarr;
+                            </a>
                         </div>
+                        <details class="mt-6">
+                            <summary>Show Alternatives to Ba Na Hills</summary>
+                            <div class="details-content space-y-4">
+                                <li class="itinerary-link">
+                                    <a href="https://www.klook.com/en-US/activity/11181-nui-than-tai-hot-springs-park-ticket-da-nang/" target="_blank">
+                                        Nui Than Tai Hot Springs Park <span>- Book on Klook &rarr;</span>
+                                    </a>
+                                    <p class="text-sm text-gray-600 pl-4">Ideal multi-generational day: hot springs for elders, water park for kids.</p>
+                                </li>
+                                <li class="itinerary-link">
+                                    <a href="https://www.klook.com/en-US/activity/67104-da-nang-mikazuki-water-park-365-ticket/" target="_blank">
+                                        Mikazuki Water Park 365 <span>- Book on Klook &rarr;</span>
+                                    </a>
+                                    <p class="text-sm text-gray-600 pl-4">Perfect all-weather option (indoor) with slides and a relaxing onsen.</p>
+                                </li>
+                            </div>
+                        </details>
                     </div>
 
                     <!-- Day 7 -->
                     <div class="bg-white p-6 rounded-lg shadow-lg day-card">
                         <h3 class="text-2xl font-bold text-gray-900 mb-3">Day 7 (Dec 26): Hoi An & Marble Mtn.</h3>
-                        <p class="text-gray-700 mb-4">The original plan to split these is inefficient. Marble Mountains is located *between* your villa and Hoi An.</p>
-                        <div class="bg-green-100 border-l-4 border-green-500 text-green-800 p-4 rounded-md">
-                            <strong class="font-semibold">Optimized Plan:</strong> Book a <strong class="font-bold">"Marble Mountains and Hoi An" combined tour</strong>. These tours are economical (SGD ~26-34) and efficient, typically visiting Marble Mountains in the afternoon and then Hoi An for its famous lantern-lit evening and night market.
-                        </div>
-                        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-md mt-4">
+                        <p class="text-gray-700 mb-2 font-semibold">Optimized Plan:</p>
+                         <ul class="list-disc list-inside mb-4 space-y-1">
+                            <li class="itinerary-link">
+                                <a href="https://www.klook.com/en-US/activity/13570-marble-mountain-hoi-an-day-tour-da-nang/" target="_blank">
+                                    Book "Marble Mt. & Hoi An" Combined Tour <span>- Book on Klook &rarr;</span>
+                                </a>
+                            </li>
+                             <li class="itinerary-link">
+                                <a href="https://www.vietnam-guide.com/hoi-an/" target="_blank">
+                                    Hoi An Ancient Town (Evening) <span>- Info &rarr;</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-md">
                             <strong class="font-semibold">Watch Out For:</strong> Bring cash for three separate fees at Marble Mountains: Main mountain (40k VND), Am Phu Cave (20k VND), and the one-way elevator (15k VND).
                         </div>
+                        <details class="mt-6">
+                            <summary>Show Recommended Hoi An Activity</summary>
+                            <div class="details-content space-y-4">
+                               <li class="itinerary-link">
+                                    <a href="https://www.klook.com/en-US/activity/19224-hoi-an-basket-boat-ride-coconut-forest/" target="_blank">
+                                        Hoi An: Coconut Forest Basket Boat Ride <span>- Book on Klook &rarr;</span>
+                                    </a>
+                                    <p class="text-sm text-gray-600 pl-4">A low-impact, highly-entertaining boat ride. Perfect for all ages.</p>
+                                </li>
+                            </div>
+                        </details>
                     </div>
 
                     <!-- Day 8 -->
                     <div class="bg-white p-6 rounded-lg shadow-lg day-card">
                         <h3 class="text-2xl font-bold text-gray-900 mb-3">Day 8 (Dec 27): Dragon Bridge Show</h3>
-                        <p class="text-gray-700 mb-4">Free day (since Marble Mtn. was moved), followed by Son Tra Night Market and the Dragon Bridge fire show.</p>
+                        <p class="text-gray-700 mb-2 font-semibold">Evening Plan:</p>
+                        <ul class="list-disc list-inside mb-4 space-y-1">
+                             <li class="itinerary-link">
+                                <a href="https://www.vietnam-guide.com/da-nang/shopping.htm" target="_blank">
+                                    Son Tra Night Market (7:30 PM) <span>- Info &rarr;</span>
+                                </a>
+                            </li>
+                             <li class="itinerary-link">
+                                <a href="https://www.vietnam-guide.com/da-nang/dragon-bridge.htm" target="_blank">
+                                    Dragon Bridge Fire Show (9:00 PM) <span>- Info &rarr;</span>
+                                </a>
+                            </li>
+                        </ul>
                         <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-800 p-4 rounded-md">
-                            <strong class="font-semibold">Plan Validation:</strong> Your timing is <strong class="font-bold">CORRECT</strong>. The fire/water show runs at <strong class="font-bold">9:00 PM on Fridays, Saturdays, and Sundays</strong>. Arrive at the Son Tra Night Market around 7:30 PM for food, then walk to Tran Hung Dao Street or the Love Lock Bridge by 8:45 PM for the best view.
+                            <strong class="font-semibold">Plan Validation:</strong> Your timing is <strong class="font-bold">CORRECT</strong>. The show is at <strong class="font-bold">9:00 PM on Friday</strong>. Best viewing is from Tran Hung Dao Street.
                         </div>
-                        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-md mt-4">
-                            <strong class="font-semibold">Market Authenticity:</strong>
-                            <ul class="list-disc list-inside ml-2 mt-2">
-                                <li><strong>Son Tra Night Market:</strong> Good for <strong class="font-semibold">convenience</strong> to the bridge, but it's a "tourist trap" with repetitive stalls and high prices.</li>
-                                <li><strong>Han Market (Daytime):</strong> This is the <strong class="font-semibold">true authentic</strong> local food experience.</li>
-                                <li><strong>Helio Night Market:</strong> A superior night market for <strong class="font-semibold">food variety</strong> and a more local vibe, but requires a separate trip.</li>
-                            </ul>
+                         <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-md mt-4">
+                            <strong class="font-semibold">Market Authenticity:</strong> Son Tra Night Market is <strong class="font-semibold">convenient</strong> but touristy. For a more <strong class="font-semibold">authentic</strong> food experience, visit Han Market (daytime) or Helio Night Market.
                         </div>
+                        <details class="mt-6">
+                            <summary>Show Alternative Options</summary>
+                            <div class="details-content space-y-4">
+                                <li class="itinerary-link">
+                                    <a href="https://www.klook.com/en-US/activity/19799-han-river-cruise-da-nang/" target="_blank">
+                                        Han River Cruise (for Dragon Bridge) <span>- Book on Klook &rarr;</span>
+                                    </a>
+                                    <p class="text-sm text-gray-600 pl-4">A far more comfortable way to see the show, especially for a group.</p>
+                                </li>
+                                <li class="itinerary-link">
+                                    <a href="https://www.klook.com/en-US/activity/24935-art-in-paradise-da-nang-3d-museum-ticket/" target="_blank">
+                                        Art in Paradise (3D Museum Da Nang) <span>- Book on Klook &rarr;</span>
+                                    </a>
+                                    <p class="text-sm text-gray-600 pl-4">A perfect indoor/rainy-day activity for your free morning.</p>
+                                </li>
+                            </div>
+                        </details>
                     </div>
 
                     <!-- Day 9 -->
                     <div class="bg-white p-6 rounded-lg shadow-lg day-card">
                         <h3 class="text-2xl font-bold text-gray-900 mb-3">Day 9 (Dec 28): Departure</h3>
-                        <p class="text-gray-700 mb-4">Visit Han Market for last-minute souvenirs before flying home from Da Nang (DAD).</p>
-                        <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-800 p-4 rounded-md">
-                            <strong class="font-semibold">Recommendation:</strong> Han Market is an excellent choice for this. It's well-known for its dried food section (dried squid, beef jerky, etc.) which are well-packaged for travel.
+                        <p class="text-gray-700 mb-2 font-semibold">Morning Plan:</p>
+                        <ul class="list-disc list-inside mb-4 space-y-1">
+                            <li class="itinerary-link">
+                                <a href="https://www.vietnam-guide.com/da-nang/han-market.htm" target="_blank">
+                                    Han Market (Last-minute souvenirs) <span>- Info &rarr;</span>
+                                </a>
+                            </li>
+                        </ul>
+                         <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-800 p-4 rounded-md">
+                            <strong class="font-semibold">Recommendation:</strong> Han Market is excellent for pre-packaged dried food souvenirs.
                         </div>
                     </div>
 
@@ -259,32 +428,12 @@
             </main>
         </div>
 
-        <footer class="text-center py-6 mt-8" style="display: none;">
+        <footer class="text-center py-6 mt-8">
             <p class="text-sm text-gray-500">Itinerary analysis based on expert-level validation dossier. Have a safe trip!</p>
         </footer>
     </div>
 
     <script>
-        // JavaScript for simple tabs
-        document.addEventListener('DOMContentLoaded', () => {
-            const tabButtons = document.querySelectorAll('.tab-button');
-            const tabContents = document.querySelectorAll('.tab-content');
-
-            tabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const tabId = button.getAttribute('data-tab');
-
-                    // Deactivate all buttons and content
-                    tabButtons.forEach(btn => btn.classList.remove('active'));
-                    tabContents.forEach(content => content.classList.remove('active'));
-
-                    // Activate clicked button and corresponding content
-                    button.classList.add('active');
-                    document.getElementById(tabId).classList.add('active');
-                });
-            });
-        });
-
         // JavaScript for Password Check
         function checkPassword() {
             // The Base64 encoded version of "abc123" is "YWJjMTIz"
